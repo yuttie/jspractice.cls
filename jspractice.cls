@@ -31,7 +31,7 @@
 \renewcommand{\maketitle}{
   \twocolumn[
     \begin{center}
-      {\LARGE \@title}
+      {\LARGE \@title \par}
 
       \vskip 1.5em
 
@@ -43,11 +43,12 @@
           \@classlabel    & \@class \\
           \@locationlabel & \@location 
         \end{tabular}
+        \par
       }
 
       \vskip 1em
 
-      {\large \@date}
+      {\large \@date \par}
     \end{center}
 
     \vskip 1.5em
