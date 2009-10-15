@@ -1,11 +1,22 @@
 %
 % jspractice based on jsarticle
 %
+\NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspractice}[2009/10/09]
-\LoadClassWithOptions{jsarticle}
 
 %
-% Document Property Declar
+% Options
+%
+\newif\if@separateabstract
+\@separateabstractfalse
+\DeclareOption{separateabstract}{\@separateabstracttrue}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{jsarticle}}
+\ProcessOptions
+\LoadClass[a4j, twocolumn]{jsarticle}
+
+%
+% Document Property Declarations
 %
 \newcommand{\@authorlabel}{発表者}
 \newcommand{\@locationlabel}{場所}
@@ -28,6 +39,9 @@
   \renewcommand{\@abstract}{#1}
 }
 
+%
+% Main Part
+%
 \renewcommand{\maketitle}{
   \twocolumn[
     \begin{center}
@@ -51,15 +65,28 @@
       {\large \@date \par}
     \end{center}
 
-    \vskip 1.5em
+    \if@separateabstract
+      \vskip 1.5em
 
-    \section*{\abstractname}
+      \section*{\centering \abstractname}
+      \@abstract
+
+      \section*{Keywords}
+      \@keywords
+    \else
+    \fi
+
+    \vskip 1.5em
+  ]
+
+  \if@separateabstract
+  \else
+    \section*{\centering \abstractname}
     \@abstract
 
     \section*{Keywords}
     \@keywords
-
-    \vskip 1.5em
-  ]
+    \par
+  \fi
 }
 
